@@ -98,9 +98,11 @@ namespace Nano_Detect {
                 File.WriteAllBytes("assets//dumper.exe", Properties.Resources.s2);
             } catch { }
         }
-
+        
         /// <summary>
-        /// Install whatever files are needed
+        /// Setup detections from given links
+        /// Detections must be sorted from the special '_' character, its not a normal underscore.
+        /// Heres an example of what a detection list would look like foreach scan type --> https://pastebin.com/raw/Kb1uLG3L
         /// </summary>
         static void setupDetections() {
             try {
