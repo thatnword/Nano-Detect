@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -44,7 +44,7 @@ namespace Nano_Detect {
         //=============================================================================================================\\
 
         static WebClient wc = new WebClient();
-        
+
         static string currentPath = AppDomain.CurrentDomain.BaseDirectory;
 
         static Dictionary<string, string> javawDetections = new Dictionary<string, string>();
@@ -77,7 +77,7 @@ namespace Nano_Detect {
             setupDetections();
 
             // generic checks
-            recodingChecker();
+            recordingChecker();
             serviceChecker();
 
             // process scanners
@@ -96,8 +96,7 @@ namespace Nano_Detect {
             try {
                 Directory.CreateDirectory("assets");
                 File.WriteAllBytes("assets//dumper.exe", Properties.Resources.s2);
-            }
-            catch { }
+            } catch { }
         }
 
         /// <summary>
@@ -132,14 +131,13 @@ namespace Nano_Detect {
                         dnsCacheDetections.Add(parsed.ElementAt(0), parsed.ElementAt(1).Substring(0, parsed.ElementAt(1).Length - 1));
                     }
                 }
-            }
-            catch { Console.WriteLine("error when setting up detections."); Console.ReadLine(); }
+            } catch { Console.WriteLine("error when setting up detections."); Console.ReadLine(); }
         }
 
         /// <summary>
         /// Alert user if any recording software is open
         /// </summary>
-        static void recodingChecker() {
+        static void recordingChecker() {
             try {
                 Console.WriteLine(" [#] Recording sofrware check");
 
@@ -155,9 +153,8 @@ namespace Nano_Detect {
                 }
 
                 if (recording)
-                    Console.WriteLine($"  -  Recoding software detected ({recordingProcesses.Substring(0, recordingProcesses.Length - 2)})");
-            }
-            catch { Console.WriteLine("error when checking recording software."); Console.ReadLine(); }
+                    Console.WriteLine($"  -  Recording software detected ({recordingProcesses.Substring(0, recordingProcesses.Length - 2)})");
+            } catch { Console.WriteLine("error when checking recording software."); Console.ReadLine(); }
         }
 
         /// <summary>
@@ -173,8 +170,7 @@ namespace Nano_Detect {
                     if (sc.StartType == ServiceStartMode.Automatic && sc.Status != ServiceControllerStatus.Running)
                         Console.WriteLine($"  -  Important service tampered with ({service})");
                 }
-            }
-            catch { Console.WriteLine("error when checking services."); Console.ReadLine(); }
+            } catch { Console.WriteLine("error when checking services."); Console.ReadLine(); }
         }
 
         /// <summary>
@@ -203,8 +199,7 @@ namespace Nano_Detect {
                     }
                 } else if (procCount > 1)
                     Console.WriteLine($"  -  More than one instance of minecraft is running");
-            }
-            catch { Console.WriteLine("error when scanning javaw."); Console.ReadLine(); }
+            } catch { Console.WriteLine("error when scanning javaw."); Console.ReadLine(); }
         }
 
         /// <summary>
@@ -222,8 +217,7 @@ namespace Nano_Detect {
                 foreach (KeyValuePair<string, string> detection in dpsDetections)
                     if (dpsDump.Contains(detection.Key))
                         Console.WriteLine($"  -  {detection.Value} has been detected (Out of instance)");
-            }
-            catch { Console.WriteLine("error when scanning dps."); Console.ReadLine(); }
+            } catch { Console.WriteLine("error when scanning dps."); Console.ReadLine(); }
         }
 
         /// <summary>
@@ -241,8 +235,7 @@ namespace Nano_Detect {
                 foreach (KeyValuePair<string, string> detection in dnsCacheDetections)
                     if (dnsCacheDump.Contains(detection.Key))
                         Console.WriteLine($"  -  {detection.Value} has been detected (Out of instance)");
-            }
-            catch { Console.WriteLine("error when scanning dnscache."); Console.ReadLine(); }
+            } catch { Console.WriteLine("error when scanning dnscache."); Console.ReadLine(); }
         }
     }
 }
